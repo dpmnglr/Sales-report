@@ -2,67 +2,83 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
     <title>Samsung Sales Tracker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --primary: 221 83% 53%; /* Samsung Blue-ish */
-        --primary-foreground: 0 0% 100%;
-        --background: 222 47% 6%; /* Darker background */
-        --foreground: 210 40% 98%; /* Light text */
-        --card: 222 47% 11%; /* Dark card */
-        --card-foreground: 210 40% 98%;
-        --border: 222 47% 15%;
-        --input: 222 47% 15%;
-        --ring: 221 83% 53%;
-        --radius: 0.75rem;
-        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
-        --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
-        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+        --bg:        #080d18;
+        --surface:   #0e1525;
+        --surface2:  #141e30;
+        --surface3:  #1a2640;
+        --border:    #1e2d45;
+        --border2:   #243452;
+
+        --blue:      #1a8fff;
+        --blue-dim:  rgba(26,143,255,0.12);
+        --blue-glow: rgba(26,143,255,0.25);
+
+        --green:     #00d4a0;
+        --green-dim: rgba(0,212,160,0.12);
+
+        --amber:     #f5a623;
+        --amber-dim: rgba(245,166,35,0.12);
+
+        --red:       #ff5c6e;
+        --red-dim:   rgba(255,92,110,0.12);
+
+        --text:      #dce8f5;
+        --text-2:    #7a95b8;
+        --text-3:    #3f5470;
+
+        --radius:    10px;
+        --radius-lg: 14px;
       }
 
-      * {
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: transparent;
-      }
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
       body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background-color: hsl(var(--background));
-        color: hsl(var(--foreground));
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg);
+        color: var(--text);
         -webkit-font-smoothing: antialiased;
+        font-size: 15px;
         line-height: 1.5;
-        font-size: 16px;
+        min-height: 100vh;
       }
 
-      /* Layout */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(26,143,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(26,143,255,0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
       .app-container {
         max-width: 800px;
         margin: 0 auto;
         min-height: 100vh;
-        padding-bottom: 8rem; /* Space for footer */
+        padding-bottom: 9rem;
+        position: relative;
+        z-index: 1;
       }
 
-      /* Header */
+      /* ── HEADER ── */
       header {
         position: sticky;
         top: 0;
         z-index: 50;
-        background-color: hsla(222, 47%, 11%, 0.8);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid hsl(var(--border));
-        padding: 0.75rem 1rem;
-        box-shadow: var(--shadow-sm);
+        background: rgba(8,13,24,0.88);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.7rem 1.1rem;
       }
 
       .header-content {
@@ -78,125 +94,110 @@
       }
 
       .logo {
-        width: 2.5rem;
-        height: 2.5rem;
-        background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(200, 90%, 60%));
-        border-radius: 0.5rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        background: linear-gradient(135deg, var(--blue), #0060cc);
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: #fff;
         font-weight: 800;
-        font-size: 1.25rem;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        font-size: 1.1rem;
+        box-shadow: 0 0 18px var(--blue-glow);
+        letter-spacing: -0.02em;
       }
 
       .header-title h1 {
-        margin: 0;
         font-size: 1rem;
         font-weight: 700;
-        letter-spacing: -0.01em;
-        color: white;
+        color: var(--text);
+        letter-spacing: -0.02em;
       }
 
       .header-title p {
-        margin: 0;
-        font-size: 0.75rem;
-        color: hsl(215 16% 70%);
-        font-weight: 500;
+        font-size: 0.72rem;
+        color: var(--text-2);
+        font-weight: 400;
+        margin-top: 1px;
       }
 
       .date-badge {
-        font-size: 0.875rem;
+        font-size: 0.8rem;
         font-weight: 600;
-        color: hsl(var(--primary));
-        background-color: hsla(221, 83%, 53%, 0.1);
-        padding: 0.35rem 0.75rem;
-        border-radius: 9999px;
-        border: 1px solid hsla(221, 83%, 53%, 0.2);
+        color: var(--blue);
+        background: var(--blue-dim);
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        border: 1px solid rgba(26,143,255,0.2);
+        letter-spacing: 0.01em;
       }
 
-      /* Main Content */
+      /* ── MAIN ── */
       main {
-        padding: 1.5rem 1rem;
+        padding: 1.25rem 1rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.25rem;
       }
 
-      /* Sections */
-      section {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+      /* ── SECTIONS ── */
+      section { display: flex; flex-direction: column; gap: 0.5rem; }
 
       .section-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0.75rem 1rem;
-        background-color: hsl(var(--card));
-        border: 1px solid hsl(var(--border));
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: var(--radius);
         cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: var(--shadow-sm);
+        transition: background 0.15s, border-color 0.15s;
       }
 
-      .section-header:active {
-        background-color: hsl(222 20% 15%);
-        transform: scale(0.99);
-      }
+      .section-header:hover { background: var(--surface2); border-color: var(--border2); }
+      .section-header:active { transform: scale(0.995); }
 
       .section-title {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.6rem;
       }
 
       .section-title h2 {
-        margin: 0;
-        font-size: 1rem;
+        font-size: 0.95rem;
         font-weight: 600;
-        color: white;
+        color: var(--text);
+        letter-spacing: -0.01em;
       }
 
       .section-toggle {
-        color: hsl(215 16% 70%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-2);
+        transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
       }
 
-      .section-header.collapsed .section-toggle {
-        transform: rotate(-90deg);
-      }
+      .section-header.collapsed .section-toggle { transform: rotate(-90deg); }
 
       .section-content {
         overflow: hidden;
-        transition: all 0.3s ease-in-out;
+        transition: max-height 0.3s ease, opacity 0.25s ease;
         max-height: 2000px;
         opacity: 1;
       }
 
-      .section-content.collapsed {
-        max-height: 0;
-        opacity: 0;
-        margin-top: -0.5rem;
-      }
+      .section-content.collapsed { max-height: 0; opacity: 0; margin-top: -0.4rem; }
 
-      /* Cards & Tables */
+      /* ── CARD ── */
       .card {
-        background: hsl(var(--card));
+        background: var(--surface);
         border-radius: var(--radius);
-        border: 1px solid hsl(var(--border));
-        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border);
         overflow: hidden;
       }
 
-      .table-container {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
+      /* ── TABLE ── */
+      .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
       table {
         width: 100%;
@@ -206,16 +207,17 @@
       }
 
       th {
-        background-color: hsl(222 20% 15%);
-        color: hsl(215 16% 70%);
+        background: var(--surface2);
+        color: var(--text-2);
         font-weight: 600;
         text-transform: uppercase;
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        padding: 0.75rem 0.5rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.07em;
+        padding: 0.65rem 0.5rem;
         text-align: center;
-        border-bottom: 1px solid hsl(var(--border));
+        border-bottom: 1px solid var(--border);
         white-space: nowrap;
+        font-family: 'DM Mono', monospace;
       }
 
       th:first-child {
@@ -224,168 +226,170 @@
         position: sticky;
         left: 0;
         z-index: 10;
-        background-color: hsl(222 20% 15%);
-        border-right: 1px solid hsl(var(--border));
+        background: var(--surface2);
+        border-right: 1px solid var(--border);
       }
-      
+
       th.bg-highlight {
-        background-color: hsla(221, 83%, 53%, 0.1);
-        color: hsl(var(--primary));
+        background: var(--blue-dim);
+        color: var(--blue);
       }
 
       td {
-        padding: 0.5rem;
-        border-bottom: 1px solid hsl(var(--border));
+        padding: 0.45rem 0.5rem;
+        border-bottom: 1px solid var(--border);
         text-align: center;
-        color: hsl(215 16% 90%);
+        color: var(--text);
+        font-family: 'DM Mono', monospace;
+        font-size: 0.85rem;
       }
-      
-      tr:last-child td {
-        border-bottom: none;
-      }
+
+      tr:last-child td { border-bottom: none; }
+      tr:hover td { background: rgba(26,143,255,0.03); }
 
       td:first-child {
         text-align: left;
         padding-left: 1rem;
         font-weight: 500;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.875rem;
         position: sticky;
         left: 0;
         z-index: 5;
-        background-color: hsl(var(--card));
-        border-right: 1px solid hsl(var(--border));
+        background: var(--surface);
+        border-right: 1px solid var(--border);
         min-width: 120px;
+        color: var(--text);
       }
 
-      /* Inputs */
+      tr:hover td:first-child { background: var(--surface2); }
+
+      /* ── INPUTS ── */
       input[type="number"], input[type="text"] {
         width: 100%;
         min-width: 60px;
-        height: 2.25rem;
+        height: 2.1rem;
         padding: 0 0.5rem;
-        border: 1px solid hsl(var(--input));
-        border-radius: 0.375rem;
-        font-size: 0.9rem;
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        font-size: 0.875rem;
         text-align: center;
-        transition: all 0.2s;
-        background: hsl(222 20% 15%);
-        color: white;
-        font-family: inherit;
+        transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+        background: var(--surface3);
+        color: var(--text);
+        font-family: 'DM Mono', monospace;
         -moz-appearance: textfield;
         appearance: textfield;
       }
 
       input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        appearance: none;
-        margin: 0;
-      }
+      input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
       input:focus {
         outline: none;
-        border-color: hsl(var(--ring));
-        box-shadow: 0 0 0 3px hsla(221, 83%, 53%, 0.15);
-        background: hsl(222 20% 20%);
-        z-index: 2;
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px var(--blue-dim);
+        background: rgba(26,143,255,0.06);
         position: relative;
+        z-index: 2;
       }
+
+      input::placeholder { color: var(--text-3); }
 
       input.input-highlight {
-        background-color: hsla(221, 83%, 53%, 0.1);
-        border-color: hsla(221, 83%, 53%, 0.2);
-        color: hsl(var(--primary));
+        background: var(--blue-dim);
+        border-color: rgba(26,143,255,0.25);
+        color: var(--blue);
         font-weight: 600;
       }
 
-      input.input-highlight:focus {
-        border-color: hsl(var(--ring));
-      }
+      input.input-highlight:focus { border-color: var(--blue); }
 
-      /* Summary Section */
+      /* ── SUMMARY / FORM ── */
       .summary-grid {
-        padding: 1.5rem;
+        padding: 1.25rem;
         display: grid;
-        gap: 1.5rem;
+        gap: 1.25rem;
       }
 
-      .form-field {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+      .form-field { display: flex; flex-direction: column; gap: 0.45rem; }
 
       .form-label {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 600;
         text-transform: uppercase;
-        color: hsl(215 16% 70%);
-        letter-spacing: 0.05em;
+        color: var(--text-2);
+        letter-spacing: 0.07em;
       }
 
-      .datalist-input-group {
-        display: flex;
-        gap: 0.5rem;
-      }
+      .form-label.label-lock { color: var(--amber); }
+
+      .datalist-input-group { display: flex; gap: 0.5rem; }
+      .datalist-input-group input[type="text"] { text-align: left; padding-left: 0.75rem; }
+
+      .target-row { display: flex; gap: 0.5rem; }
+      .target-row input { text-align: left; padding-left: 0.75rem; }
 
       .selected-items-box {
-        margin-top: 0.75rem;
-        padding: 0.75rem;
-        background-color: hsl(222 20% 15%);
-        border-radius: 0.5rem;
-        border: 1px solid hsl(var(--border));
-        font-size: 0.875rem;
-        line-height: 1.6;
+        margin-top: 0.5rem;
+        padding: 0.7rem;
+        background: var(--surface2);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        font-size: 0.85rem;
       }
 
       .selected-items-box strong {
-        color: white;
+        color: var(--text-2);
         display: block;
-        margin-bottom: 0.25rem;
-        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+        font-size: 0.7rem;
         text-transform: uppercase;
-        letter-spacing: 0.025em;
+        letter-spacing: 0.06em;
+        font-weight: 600;
       }
 
       .selected-items-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        color: hsl(215 16% 80%);
+        gap: 0.4rem;
+        color: var(--text-2);
+        font-size: 0.8rem;
       }
 
       .tag {
-        background: hsl(222 20% 25%);
-        padding: 2px 8px;
-        border-radius: 4px;
+        background: var(--surface3);
+        padding: 3px 9px;
+        border-radius: 5px;
         display: flex;
         align-items: center;
-        gap: 6px;
-        border: 1px solid hsl(var(--border));
-        font-size: 0.8rem;
+        gap: 5px;
+        border: 1px solid var(--border2);
+        font-size: 0.78rem;
+        color: var(--text);
       }
 
       .tag-remove {
         cursor: pointer;
-        color: hsl(0 84% 60%);
-        font-weight: bold;
-        padding: 0 2px;
+        color: var(--red);
+        font-weight: 700;
+        padding: 0 1px;
+        line-height: 1;
       }
 
-      /* Footer Actions */
+      /* ── FOOTER ── */
       .footer-actions {
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 1rem;
-        background: hsla(222, 47%, 11%, 0.9);
-        backdrop-filter: blur(12px);
-        border-top: 1px solid hsl(var(--border));
+        padding: 0.85rem 1rem;
+        background: rgba(8,13,24,0.94);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
         z-index: 40;
         display: flex;
         justify-content: center;
-        gap: 0.75rem;
-        box-shadow: 0 -4px 12px rgba(0,0,0,0.5);
       }
 
       .footer-inner {
@@ -393,7 +397,7 @@
         max-width: 800px;
         display: flex;
         justify-content: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
         flex-wrap: wrap;
       }
 
@@ -401,143 +405,124 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
-        height: 2.75rem;
-        padding: 0 1.25rem;
-        border-radius: 0.5rem;
-        font-size: 0.9rem;
+        gap: 0.4rem;
+        height: 2.5rem;
+        padding: 0 1rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s;
         border: none;
         flex: 1;
-        min-width: 110px;
+        min-width: 90px;
         white-space: nowrap;
+        font-family: 'Outfit', sans-serif;
+        letter-spacing: 0.01em;
       }
 
       .btn-primary {
-        background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 45%));
-        color: white;
-        box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+        background: linear-gradient(135deg, #1a8fff, #0060cc);
+        color: #fff;
+        box-shadow: 0 4px 14px var(--blue-glow);
       }
 
-      .btn-primary:active {
-        transform: translateY(1px);
-        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-      }
+      .btn-primary:hover { box-shadow: 0 4px 20px rgba(26,143,255,0.4); }
+      .btn-primary:active { transform: translateY(1px); }
 
       .btn-outline {
-        background: hsl(222 20% 15%);
-        border: 1px solid hsl(var(--border));
-        color: white;
-        box-shadow: var(--shadow-sm);
+        background: var(--surface2);
+        border: 1px solid var(--border2);
+        color: var(--text);
       }
 
-      .btn-outline:active {
-        background-color: hsl(222 20% 20%);
-        transform: translateY(1px);
-      }
+      .btn-outline:hover { background: var(--surface3); border-color: var(--text-3); }
+      .btn-outline:active { transform: translateY(1px); }
 
-      /* Modal */
+      /* ── MODAL ── */
       .modal-backdrop {
         display: none;
         position: fixed;
         inset: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(4px);
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(6px);
         z-index: 100;
         align-items: center;
         justify-content: center;
         padding: 1rem;
         opacity: 0;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.2s;
       }
 
-      .modal-backdrop.open {
-        display: flex;
-        opacity: 1;
-      }
+      .modal-backdrop.open { display: flex; opacity: 1; }
 
       .modal-content {
-        background: hsl(var(--card));
+        background: var(--surface);
         width: 100%;
         max-width: 500px;
-        border-radius: 1rem;
-        box-shadow: var(--shadow-lg);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border2);
+        box-shadow: 0 24px 64px rgba(0,0,0,0.6);
         display: flex;
         flex-direction: column;
         max-height: 90vh;
-        transform: scale(0.95);
-        transition: transform 0.2s ease;
-        border: 1px solid hsl(var(--border));
+        transform: scale(0.96);
+        transition: transform 0.2s;
       }
 
-      .modal-backdrop.open .modal-content {
-        transform: scale(1);
-      }
+      .modal-backdrop.open .modal-content { transform: scale(1); }
 
       .modal-header {
-        padding: 1.25rem;
-        border-bottom: 1px solid hsl(var(--border));
+        padding: 1.1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
       .modal-header h3 {
-        margin: 0;
-        font-size: 1.125rem;
+        font-size: 1rem;
         font-weight: 700;
-        color: white;
+        color: var(--text);
+        letter-spacing: -0.01em;
       }
 
-      .modal-body {
-        flex: 1;
-        padding: 1.25rem;
-        overflow-y: auto;
-      }
+      .modal-header button { background: none; border: none; cursor: pointer; padding: 0.2rem; color: var(--text-2); }
+      .modal-header button:hover { color: var(--text); }
+
+      .modal-body { flex: 1; padding: 1.1rem 1.25rem; overflow-y: auto; }
 
       .report-textarea {
         width: 100%;
         height: 300px;
         padding: 1rem;
-        border: 1px solid hsl(var(--border));
-        border-radius: 0.5rem;
-        font-family: "Menlo", "Monaco", "Courier New", monospace;
-        font-size: 0.8rem;
-        background-color: hsl(222 20% 6%);
-        color: #10b981;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-family: 'DM Mono', monospace;
+        font-size: 0.78rem;
+        background: var(--bg);
+        color: var(--green);
         resize: none;
         white-space: pre;
+        line-height: 1.6;
       }
 
-      .report-textarea:focus {
-        outline: none;
-        border-color: hsl(var(--ring));
-        background-color: hsl(222 20% 8%);
-      }
+      .report-textarea:focus { outline: none; border-color: var(--blue); }
 
       .modal-footer {
-        padding: 1.25rem;
-        border-top: 1px solid hsl(var(--border));
+        padding: 1.1rem 1.25rem;
+        border-top: 1px solid var(--border);
         display: flex;
-        gap: 0.75rem;
+        gap: 0.6rem;
         justify-content: flex-end;
       }
 
-      /* Utilities */
       .hidden { display: none; }
-      
+
       @media (min-width: 768px) {
-        .summary-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .footer-inner {
-          justify-content: flex-end;
-        }
-        .btn {
-          flex: 0 0 auto;
-        }
+        .summary-grid { grid-template-columns: 1fr 1fr; }
+        .footer-inner { justify-content: flex-end; }
+        .btn { flex: 0 0 auto; }
       }
     </style>
   </head>
@@ -549,7 +534,7 @@
             <div class="logo">S</div>
             <div class="header-title">
               <h1>Samsung Sales</h1>
-              <p>AV & HA Tracker</p>
+              <p>AV &amp; HA Tracker</p>
             </div>
           </div>
           <div id="current-date" class="date-badge"></div>
@@ -561,15 +546,11 @@
         <section>
           <div class="section-header" data-section="panel">
             <div class="section-title">
-              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
+              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               <h2>Panel Sales</h2>
             </div>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: hsl(var(--primary))">
-              <rect width="20" height="15" x="2" y="3" rx="2" ry="2" />
-              <path d="M7 21h10" />
-              <path d="M12 18v3" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--blue)">
+              <rect width="20" height="15" x="2" y="3" rx="2" ry="2"/><path d="M7 21h10"/><path d="M12 18v3"/>
             </svg>
           </div>
           <div class="section-content">
@@ -580,7 +561,7 @@
                     <tr>
                       <th>Model</th>
                       <th class="bg-highlight">SS</th>
-                      <th>Value</th>
+                      <th>Value (₹)</th>
                     </tr>
                   </thead>
                   <tbody id="panel-body"></tbody>
@@ -594,15 +575,11 @@
         <section>
           <div class="section-header" data-section="audio">
             <div class="section-title">
-              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
+              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               <h2>Audio Sales</h2>
             </div>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: hsl(160 84% 39%)">
-              <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
-              <circle cx="12" cy="14" r="4" />
-              <line x1="12" x2="12" y1="6" y2="6" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--green)">
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><circle cx="12" cy="14" r="4"/><line x1="12" x2="12" y1="6" y2="6"/>
             </svg>
           </div>
           <div class="section-content">
@@ -613,7 +590,7 @@
                     <tr>
                       <th>Type</th>
                       <th class="bg-highlight">SS</th>
-                      <th>Value</th>
+                      <th>Value (₹)</th>
                     </tr>
                   </thead>
                   <tbody id="audio-body">
@@ -633,14 +610,11 @@
         <section>
           <div class="section-header" data-section="ha">
             <div class="section-title">
-              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
+              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
               <h2>HA Sales</h2>
             </div>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: hsl(262 83% 58%)">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber)">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
           </div>
           <div class="section-content">
@@ -651,7 +625,7 @@
                     <tr>
                       <th>Category</th>
                       <th class="bg-highlight">SS</th>
-                      <th>Value</th>
+                      <th>Value (₹)</th>
                     </tr>
                   </thead>
                   <tbody id="ha-body"></tbody>
@@ -661,33 +635,42 @@
           </div>
         </section>
 
-        <!-- Summary Section -->
+        <!-- Summary & Details Section -->
         <section>
           <div class="section-header" data-section="summary">
-             <div class="section-title">
-              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m6 9 6 6 6-6"/>
-              </svg>
-              <h2>Summary & Details</h2>
+            <div class="section-title">
+              <svg class="section-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <h2>Summary &amp; Details</h2>
             </div>
           </div>
           <div class="section-content">
             <div class="card">
               <div class="summary-grid">
-                
-                <!-- AV Models -->
+
+                <!-- AV Monthly Target -->
+                <div class="form-field">
+                  <span class="form-label label-lock">🔒 AV Monthly Target — QTY &amp; Value</span>
+                  <div class="target-row">
+                    <input type="number" id="av-qty-target" placeholder="QTY (units)" style="text-align:left;padding-left:0.75rem;" />
+                    <input type="number" id="av-target" placeholder="Value (₹)" style="text-align:left;padding-left:0.75rem;" />
+                  </div>
+                </div>
+
+                <!-- HA Monthly Target -->
+                <div class="form-field">
+                  <span class="form-label label-lock">🔒 HA Monthly Target — QTY &amp; Value</span>
+                  <div class="target-row">
+                    <input type="number" id="ha-qty-target" placeholder="QTY (units)" style="text-align:left;padding-left:0.75rem;" />
+                    <input type="number" id="ha-target" placeholder="Value (₹)" style="text-align:left;padding-left:0.75rem;" />
+                  </div>
+                </div>
+
+                <!-- AV Models Sold -->
                 <div class="form-field">
                   <span class="form-label">AV Models Sold</span>
                   <div class="datalist-input-group">
-                    <input
-                      type="text"
-                      id="av-models-sold"
-                      list="av-models-list"
-                      placeholder="Type model number..."
-                    />
-                    <button type="button" id="add-av-model-btn" class="btn btn-primary" style="padding: 0 1rem; flex: 0 0 auto; min-width: auto;">
-                      Add
-                    </button>
+                    <input type="text" id="av-models-sold" list="av-models-list" placeholder="Type model number..." />
+                    <button type="button" id="add-av-model-btn" class="btn btn-primary" style="padding:0 1rem;flex:0 0 auto;min-width:auto;">Add</button>
                   </div>
                   <datalist id="av-models-list"></datalist>
                   <div class="selected-items-box">
@@ -696,23 +679,16 @@
                   </div>
                 </div>
 
-                <!-- HA Models -->
+                <!-- HA Models Sold -->
                 <div class="form-field">
                   <span class="form-label">HA Categories Sold</span>
                   <div class="datalist-input-group">
-                    <input
-                      type="text"
-                      id="ha-models-input"
-                      list="ha-models-list"
-                      placeholder="Type category/model..."
-                    />
-                    <button type="button" id="add-ha-model-btn" class="btn btn-primary" style="padding: 0 1rem; flex: 0 0 auto; min-width: auto;">
-                      Add
-                    </button>
+                    <input type="text" id="ha-models-input" list="ha-models-list" placeholder="Type category/model..." />
+                    <button type="button" id="add-ha-model-btn" class="btn btn-primary" style="padding:0 1rem;flex:0 0 auto;min-width:auto;">Add</button>
                   </div>
                   <datalist id="ha-models-list"></datalist>
                   <div class="selected-items-box">
-                    <strong>🏠 Selected HA Models:</strong>
+                    <strong>🏠 Selected HA Categories:</strong>
                     <div id="selected-models-list" class="selected-items-list">None</div>
                   </div>
                 </div>
@@ -726,44 +702,27 @@
       <div class="footer-actions">
         <div class="footer-inner">
           <button id="save-btn" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
-              <circle cx="12" cy="13" r="3" />
-              <path d="M7 3v5h8V3" />
-            </svg>
-            Save Today
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><circle cx="12" cy="13" r="3"/><path d="M7 3v5h8V3"/></svg>
+            Save
           </button>
           <button id="report-btn" class="btn btn-outline">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-              <path d="M10 9H8" />
-              <path d="M13 13H8" />
-              <path d="M13 17H8" />
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M13 13H8"/><path d="M13 17H8"/></svg>
             Full Report
           </button>
           <button id="report-av-btn" class="btn btn-outline">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 4h18v4H3z" />
-              <path d="M7 15h3v5H7z" />
-              <path d="M14 11h3v9h-3z" />
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18v4H3z"/><path d="M7 15h3v5H7z"/><path d="M14 11h3v9h-3z"/></svg>
             AV Report
           </button>
           <button id="report-ha-btn" class="btn btn-outline">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 12l9-9 9 9" />
-              <path d="M9 21V9h6v12" />
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
             HA Report
           </button>
-          <button id="clear-btn" class="btn btn-outline" style="color: hsl(0 84% 60%); border-color: hsl(0 84% 90%);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 6h18" />
-              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-            </svg>
+          <button id="reset-targets-btn" class="btn btn-outline" style="color:var(--amber);border-color:rgba(245,166,35,0.35);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10"/><path d="M16 12h6"/><path d="m19 9 3 3-3 3"/></svg>
+            Reset Targets
+          </button>
+          <button id="clear-btn" class="btn btn-outline" style="color:var(--red);border-color:rgba(255,92,110,0.35);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
             Clear
           </button>
         </div>
@@ -774,24 +733,18 @@
     <div id="modal" class="modal-backdrop">
       <div class="modal-content">
         <div class="modal-header">
-          <h3>Daily Report</h3>
-          <button id="close-modal" style="background: none; border: none; cursor: pointer; padding: 0.25rem;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+          <h3 id="modal-title">Daily Report</h3>
+          <button id="close-modal">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
         </div>
         <div class="modal-body">
           <textarea id="report-text" class="report-textarea" readonly></textarea>
         </div>
         <div class="modal-footer">
-          <button id="modal-close-btn" class="btn btn-outline" style="flex: 1;">Close</button>
-          <button id="copy-btn" class="btn btn-primary" style="flex: 2;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-            </svg>
+          <button id="modal-close-btn" class="btn btn-outline" style="flex:1;">Close</button>
+          <button id="copy-btn" class="btn btn-primary" style="flex:2;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
             Copy to Clipboard
           </button>
         </div>
@@ -799,253 +752,193 @@
     </div>
 
     <script>
-      // State
+      // ── CONSTANTS ──
       const MODELS = [
-        "32 Basic", "32 Smart", "43 FHD", "43 UHD", "50 UHD",
-        "55 UHD", "65 UHD", "75 UHD", "50 QLED", "55 QLED",
-        "65 QLED", "75 QLED", "All OLED",
+        "32 Basic","32 Smart","43 FHD","43 UHD","50 UHD",
+        "55 UHD","65 UHD","75 UHD","50 QLED","55 QLED",
+        "65 QLED","75 QLED","All OLED",
       ];
-      const HA_CATEGORIES = [
-        "SBS", "CBU", "FF", "DC", "FLT", "TL", "SA", "MO", "AC",
-      ];
+      const HA_CATEGORIES = ["SBS","CBU","FF","DC","FLT","TL","SA","MO","AC"];
 
-      // Models for sold dropdowns
       const TV_MODELS_SOLD = [
-        "43U8100F", "43U8600F", "43U8400F", "43F5500F", "50U8400F",
-        "55Q7F", "55LS03F", "55U8400F", "65Q60B", "HW-Q600C",
-        "HW-B750F", "MX-T40"
+        "43U8100F","43U8600F","43U8400F","43F5500F","50U8400F",
+        "55Q7F","55LS03F","55U8400F","65Q60B","HW-Q600C","HW-B750F","MX-T40"
       ];
-
       const HA_MODELS_SOLD = [
-        "AR60F19D13W", "AR60F19D1ZW", "AR50F18D13H", "AR50F19D1ZH",
-        "MC32A7056CK/TL", "MC28A5145VK/TL", "MC28A5013AK/TL", "MC23A3515AK/TL",
-        "WA80F10B3N", "WA80F10S2B", "WA80F08H2B", "WA80F08S2C", "WA80F08E2C",
-        "WA70BG4441BY", "WW70R22EK0X", "WW90G5U24AS", "WW120G5B24AB",
-        "WW80T504DAB", "WT70C3000RR", "WT75B3200GD", "RT41DG6A2BB1HL",
-        "RT34DG5A2BBXHL", "RT34DG5A4DB1HL", "RT28C3042S8/HL", "RT28C3732S8/HL",
-        "RS76CG8103B1HL", "RF57A5032B1/TL", "RT56DG7A6AB1TL",
-        "RT80F51C2BHL", "RT80F51C2FHL"
+        "AR60F19D13W","AR60F19D1ZW","AR50F18D13H","AR50F19D1ZH",
+        "MC32A7056CK/TL","MC28A5145VK/TL","MC28A5013AK/TL","MC23A3515AK/TL",
+        "WA80F10B3N","WA80F10S2B","WA80F08H2B","WA80F08S2C","WA80F08E2C",
+        "WA70BG4441BY","WW70R22EK0X","WW90G5U24AS","WW120G5B24AB",
+        "WW80T504DAB","WT70C3000RR","WT75B3200GD","RT41DG6A2BB1HL",
+        "RT34DG5A2BBXHL","RT34DG5A4DB1HL","RT28C3042S8/HL","RT28C3732S8/HL",
+        "RS76CG8103B1HL","RF57A5032B1/TL","RT56DG7A6AB1TL",
+        "RT80F51C2BHL","RT80F51C2FHL"
       ];
 
+      // ── STATE ──
       let state = {
-        panel: {},
-        panelValues: {},
-        audio: { ss: 0, lg: 0, so: 0, ot: 0 },
-        audioValue: 0,
-        ha: {},
-        haValues: {},
-        avValue: 0,
-        haValue: 0,
-        avModels: "",
-        haModels: "",
+        panel: {}, panelValues: {},
+        audio: { ss: 0, so: 0, ot: 0 }, audioValue: 0,
+        ha: {}, haValues: {},
+        avValue: 0, haValue: 0,
+        avModels: "", haModels: "",
+        avTarget: 0, haTarget: 0,
+        avQtyTarget: 0, haQtyTarget: 0,
       };
 
-      // Init State
-      MODELS.forEach((m) => {
-        state.panel[m] = { ss: 0, so: 0, pa: 0, ot: 0 };
-        state.panelValues[m] = 0;
-      });
-      HA_CATEGORIES.forEach((h) => {
-        state.ha[h] = { ss: 0, lg: 0, go: 0, ot: 0 };
-        state.haValues[h] = 0;
-      });
+      MODELS.forEach(m => { state.panel[m] = { ss: 0, so: 0, pa: 0, ot: 0 }; state.panelValues[m] = 0; });
+      HA_CATEGORIES.forEach(h => { state.ha[h] = { ss: 0, lg: 0, go: 0, ot: 0 }; state.haValues[h] = 0; });
 
-      // Utils - IMPROVED FOR WHATSAPP
+      // ── UTILS ──
       const getTodayDate = () => new Date();
-      const getKey = () => `AV_MTD_${getTodayDate().getFullYear()}_${getTodayDate().getMonth()}`;
-      
+      const getKey = () => `SS_MTD_${getTodayDate().getFullYear()}_${getTodayDate().getMonth()}`;
+      const getTargetKey = () => `SS_TARGETS_${getTodayDate().getFullYear()}_${getTodayDate().getMonth()}`;
       const getTodayStr = () => {
-          const d = getTodayDate();
-          const year = d.getFullYear();
-          const month = String(d.getMonth() + 1).padStart(2, '0');
-          const day = String(d.getDate()).padStart(2, '0');
-          return `${year}-${month}-${day}`;
+        const d = getTodayDate();
+        return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
       };
+      const formatNum = n => new Intl.NumberFormat("en-IN").format(n || 0);
+      const rp = (s, n) => { const t = String(s); return t + ' '.repeat(Math.max(0, n - t.length)); };
+      const lp = (s, n) => { const t = String(s); return ' '.repeat(Math.max(0, n - t.length)) + t; };
 
-      const formatNum = (n) => new Intl.NumberFormat("en-IN").format(n || 0);
-      
-      // Improved padding functions for better WhatsApp alignment
-      const padRight = (s, l) => {
-        const str = String(s);
-        return str + ' '.repeat(Math.max(0, l - str.length));
-      };
-      
-      const padLeft = (s, l) => {
-        const str = String(s);
-        return ' '.repeat(Math.max(0, l - str.length)) + str;
-      };
-
-      // DOM Elements
+      // ── DOM REFS ──
       const panelBody = document.getElementById("panel-body");
-      const haBody = document.getElementById("ha-body");
-      const audioSS = document.getElementById("audio-ss");
-      const audioVal = document.getElementById("audio-value");
+      const haBody    = document.getElementById("ha-body");
+      const audioSS   = document.getElementById("audio-ss");
+      const audioVal  = document.getElementById("audio-value");
       const avModelsInput = document.getElementById("av-models-sold");
       const haModelsInput = document.getElementById("ha-models-input");
-      const modalTitle = document.querySelector("#modal .modal-header h3");
+      const modalTitle = document.getElementById("modal-title");
+      const avTargetInput    = document.getElementById("av-target");
+      const haTargetInput    = document.getElementById("ha-target");
+      const avQtyTargetInput = document.getElementById("av-qty-target");
+      const haQtyTargetInput = document.getElementById("ha-qty-target");
 
-      // Calculations
+      // ── TOTALS ──
       const updateTotals = () => {
-        const pVal = Object.values(state.panelValues).reduce(
-          (a, b) => a + (parseInt(b) || 0),
-          0,
-        );
+        const pVal = Object.values(state.panelValues).reduce((a, b) => a + (parseInt(b) || 0), 0);
         state.avValue = pVal + (parseInt(audioVal.value) || 0);
-
-        state.haValue = Object.values(state.haValues).reduce(
-          (a, b) => a + (parseInt(b) || 0),
-          0,
-        );
+        state.haValue = Object.values(state.haValues).reduce((a, b) => a + (parseInt(b) || 0), 0);
       };
 
-      // Render Tables
-      MODELS.forEach((m, i) => {
+      // ── RENDER TABLES ──
+      MODELS.forEach(m => {
         const row = document.createElement("tr");
         row.innerHTML = `
           <td>${m}</td>
           <td class="bg-highlight"><input type="number" data-model="${m}" data-field="ss" class="input-highlight" value="0"></td>
-          <td><input type="number" data-model="${m}" data-field="value" placeholder="₹"></td>
-        `;
+          <td><input type="number" data-model="${m}" data-field="value" placeholder="₹"></td>`;
         panelBody.appendChild(row);
       });
 
-      HA_CATEGORIES.forEach((h, i) => {
+      HA_CATEGORIES.forEach(h => {
         const row = document.createElement("tr");
         row.innerHTML = `
           <td>${h}</td>
           <td class="bg-highlight"><input type="number" data-cat="${h}" data-field="ss" class="input-highlight" value="0"></td>
-          <td><input type="number" data-cat="${h}" data-field="value" placeholder="₹"></td>
-        `;
+          <td><input type="number" data-cat="${h}" data-field="value" placeholder="₹"></td>`;
         haBody.appendChild(row);
       });
 
-      // Events
-      document.addEventListener("input", (e) => {
+      // ── EVENTS ──
+      document.addEventListener("input", e => {
         const el = e.target;
         if (el.dataset.model) {
-          if (el.dataset.field === "value")
-            state.panelValues[el.dataset.model] = el.value;
+          if (el.dataset.field === "value") state.panelValues[el.dataset.model] = el.value;
           else state.panel[el.dataset.model][el.dataset.field] = el.value;
         } else if (el.dataset.cat) {
-          if (el.dataset.field === "value")
-            state.haValues[el.dataset.cat] = el.value;
+          if (el.dataset.field === "value") state.haValues[el.dataset.cat] = el.value;
           else state.ha[el.dataset.cat][el.dataset.field] = el.value;
         }
         updateTotals();
       });
 
-      [audioSS, audioVal].forEach((el) => {
-        el.addEventListener("input", () => {
-          state.audio = {
-            ss: audioSS.value,
-            lg: 0,
-            so: 0,
-            ot: 0,
-          };
-          state.audioValue = audioVal.value;
-          updateTotals();
-        });
-      });
+      [audioSS, audioVal].forEach(el => el.addEventListener("input", () => {
+        state.audio = { ss: audioSS.value, so: 0, ot: 0 };
+        state.audioValue = audioVal.value;
+        updateTotals();
+      }));
 
-      // Model Management
+      avTargetInput.addEventListener("input", () => { state.avTarget = parseInt(avTargetInput.value) || 0; saveTargets(); });
+      haTargetInput.addEventListener("input", () => { state.haTarget = parseInt(haTargetInput.value) || 0; saveTargets(); });
+      avQtyTargetInput.addEventListener("input", () => { state.avQtyTarget = parseInt(avQtyTargetInput.value) || 0; saveTargets(); });
+      haQtyTargetInput.addEventListener("input", () => { state.haQtyTarget = parseInt(haQtyTargetInput.value) || 0; saveTargets(); });
+
+      // ── TARGETS PERSISTENCE ──
+      const saveTargets = () => {
+        localStorage.setItem(getTargetKey(), JSON.stringify({
+          avTarget: state.avTarget, haTarget: state.haTarget,
+          avQtyTarget: state.avQtyTarget, haQtyTarget: state.haQtyTarget,
+        }));
+      };
+
+      const loadTargets = () => {
+        const stored = localStorage.getItem(getTargetKey());
+        if (!stored) return;
+        const t = JSON.parse(stored);
+        state.avTarget = t.avTarget || 0;
+        state.haTarget = t.haTarget || 0;
+        state.avQtyTarget = t.avQtyTarget || 0;
+        state.haQtyTarget = t.haQtyTarget || 0;
+        avTargetInput.value    = t.avTarget    || "";
+        haTargetInput.value    = t.haTarget    || "";
+        avQtyTargetInput.value = t.avQtyTarget || "";
+        haQtyTargetInput.value = t.haQtyTarget || "";
+      };
+
+      // ── MODEL TAGS ──
       let selectedAvModels = [];
       let selectedHaModels = [];
 
-      const removeAvModel = (model) => {
-        selectedAvModels = selectedAvModels.filter(m => m !== model);
-        updateSelectedAvModelsDisplay();
-      };
-
-      const removeHaModel = (model) => {
-        selectedHaModels = selectedHaModels.filter(m => m !== model);
-        updateSelectedHaModelsDisplay();
-      };
+      const removeAvModel = m => { selectedAvModels = selectedAvModels.filter(x => x !== m); updateSelectedAvModelsDisplay(); };
+      const removeHaModel = m => { selectedHaModels = selectedHaModels.filter(x => x !== m); updateSelectedHaModelsDisplay(); };
 
       const updateSelectedAvModelsDisplay = () => {
-        const displayElement = document.getElementById('selected-av-models-list');
-        if (selectedAvModels.length === 0) {
-          displayElement.textContent = 'None';
-        } else {
-          displayElement.innerHTML = '';
+        const el = document.getElementById("selected-av-models-list");
+        if (!selectedAvModels.length) { el.textContent = "None"; }
+        else {
+          el.innerHTML = "";
           selectedAvModels.forEach(m => {
-            const tag = document.createElement('div');
-            tag.className = 'tag';
-            tag.innerHTML = `${m} <span class="tag-remove" onclick="removeAvModel('${m}')">×</span>`;
-            displayElement.appendChild(tag);
+            const t = document.createElement("div");
+            t.className = "tag";
+            t.innerHTML = `${m} <span class="tag-remove" onclick="removeAvModel('${m}')">×</span>`;
+            el.appendChild(t);
           });
         }
-        state.avModels = selectedAvModels.join('\n');
+        state.avModels = selectedAvModels.join("\n");
       };
 
       const updateSelectedHaModelsDisplay = () => {
-        const displayElement = document.getElementById('selected-models-list');
-        if (selectedHaModels.length === 0) {
-          displayElement.textContent = 'None';
-        } else {
-          displayElement.innerHTML = '';
+        const el = document.getElementById("selected-models-list");
+        if (!selectedHaModels.length) { el.textContent = "None"; }
+        else {
+          el.innerHTML = "";
           selectedHaModels.forEach(m => {
-            const tag = document.createElement('div');
-            tag.className = 'tag';
-            tag.innerHTML = `${m} <span class="tag-remove" onclick="removeHaModel('${m}')">×</span>`;
-            displayElement.appendChild(tag);
+            const t = document.createElement("div");
+            t.className = "tag";
+            t.innerHTML = `${m} <span class="tag-remove" onclick="removeHaModel('${m}')">×</span>`;
+            el.appendChild(t);
           });
         }
-        state.haModels = selectedHaModels.join('\n');
+        state.haModels = selectedHaModels.join("\n");
       };
 
-      const addAvModelToList = (model) => {
-        const trimmedModel = model.trim();
-        if (trimmedModel && !selectedAvModels.includes(trimmedModel)) {
-          selectedAvModels.push(trimmedModel);
-          updateSelectedAvModelsDisplay();
-          avModelsInput.value = '';
-        }
-      };
+      const addAvModel = m => { const s = m.trim(); if (s && !selectedAvModels.includes(s)) { selectedAvModels.push(s); updateSelectedAvModelsDisplay(); avModelsInput.value = ""; } };
+      const addHaModel = m => { const s = m.trim(); if (s && !selectedHaModels.includes(s)) { selectedHaModels.push(s); updateSelectedHaModelsDisplay(); haModelsInput.value = ""; } };
 
-      const addHaModelToList = (model) => {
-        const trimmedModel = model.trim();
-        if (trimmedModel && !selectedHaModels.includes(trimmedModel)) {
-          selectedHaModels.push(trimmedModel);
-          updateSelectedHaModelsDisplay();
-          haModelsInput.value = '';
-        }
-      };
+      document.getElementById("add-av-model-btn").addEventListener("click", e => { e.preventDefault(); addAvModel(avModelsInput.value); });
+      document.getElementById("add-ha-model-btn").addEventListener("click", e => { e.preventDefault(); addHaModel(haModelsInput.value); });
+      avModelsInput.addEventListener("keypress", e => { if (e.key === "Enter") { e.preventDefault(); addAvModel(avModelsInput.value); } });
+      haModelsInput.addEventListener("keypress", e => { if (e.key === "Enter") { e.preventDefault(); addHaModel(haModelsInput.value); } });
 
-      // Add Buttons & Inputs
-      document.getElementById('add-av-model-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        addAvModelToList(avModelsInput.value);
-      });
-
-      document.getElementById('add-ha-model-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        addHaModelToList(haModelsInput.value);
-      });
-
-      // Handle Enter key
-      avModelsInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          addAvModelToList(avModelsInput.value);
-        }
-      });
-
-      haModelsInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          addHaModelToList(haModelsInput.value);
-        }
-      });
-
-      // Data Persistence
+      // ── DATA PERSISTENCE ──
       const save = () => {
         const stored = localStorage.getItem(getKey());
         const data = stored ? JSON.parse(stored) : [];
         const today = getTodayStr();
         const entry = { date: today, ...state };
-        const idx = data.findIndex((d) => d.date === today);
-        if (idx >= 0) data[idx] = entry;
-        else data.push(entry);
+        const idx = data.findIndex(d => d.date === today);
+        if (idx >= 0) data[idx] = entry; else data.push(entry);
         localStorage.setItem(getKey(), JSON.stringify(data));
       };
 
@@ -1053,74 +946,52 @@
         const stored = localStorage.getItem(getKey());
         if (!stored) return;
         const data = JSON.parse(stored);
-        const today = data.find((d) => d.date === getTodayStr());
+        const today = data.find(d => d.date === getTodayStr());
         if (!today) return;
-
         state = today;
-        MODELS.forEach((m) => {
-          const row = Array.from(panelBody.rows).find(
-            (r) => r.cells[0].textContent === m,
-          );
+
+        MODELS.forEach(m => {
+          const row = Array.from(panelBody.rows).find(r => r.cells[0].textContent === m);
           if (!row) return;
-          row.cells[1].firstChild.value = today.panel[m].ss;
+          row.cells[1].firstChild.value = today.panel[m]?.ss ?? 0;
           row.cells[2].firstChild.value = today.panelValues[m] || "";
         });
-        HA_CATEGORIES.forEach((h) => {
-          const row = Array.from(haBody.rows).find(
-            (r) => r.cells[0].textContent === h,
-          );
+        HA_CATEGORIES.forEach(h => {
+          const row = Array.from(haBody.rows).find(r => r.cells[0].textContent === h);
           if (!row) return;
-          row.cells[1].firstChild.value = today.ha[h].ss;
+          row.cells[1].firstChild.value = today.ha[h]?.ss ?? 0;
           row.cells[2].firstChild.value = today.haValues[h] || "";
         });
-        audioSS.value = today.audio.ss;
+        audioSS.value = today.audio?.ss ?? 0;
         audioVal.value = today.audioValue || "";
-        
-        if (today.avModels) {
-          selectedAvModels = today.avModels.split('\n').filter(m => m.trim());
-        } else {
-          selectedAvModels = [];
-        }
-        updateSelectedAvModelsDisplay();
 
-        if (today.haModels) {
-          selectedHaModels = today.haModels.split('\n').filter(m => m.trim());
-        } else {
-          selectedHaModels = [];
-        }
+        selectedAvModels = today.avModels ? today.avModels.split("\n").filter(m => m.trim()) : [];
+        updateSelectedAvModelsDisplay();
+        selectedHaModels = today.haModels ? today.haModels.split("\n").filter(m => m.trim()) : [];
         updateSelectedHaModelsDisplay();
-        
         updateTotals();
       };
 
-      // Report Generation - IMPROVED FOR WHATSAPP
+      // ── REPORT GENERATION ──
       const getReportData = () => {
         save();
         const data = JSON.parse(localStorage.getItem(getKey()) || "[]");
         const mtd = {
-          panel: {},
-          audio: { ss: 0, lg: 0, so: 0, ot: 0 },
-          ha: {},
-          avVal: 0,
-          haVal: 0,
+          panel: {}, audio: { ss: 0, so: 0, ot: 0 },
+          ha: {}, avVal: 0, haVal: 0,
         };
-        MODELS.forEach((m) => (mtd.panel[m] = { ss: 0, so: 0, pa: 0, ot: 0 }));
-        HA_CATEGORIES.forEach(
-          (h) => (mtd.ha[h] = { ss: 0, lg: 0, go: 0, ot: 0 }),
-        );
+        MODELS.forEach(m => (mtd.panel[m] = { ss: 0, so: 0, pa: 0, ot: 0 }));
+        HA_CATEGORIES.forEach(h => (mtd.ha[h] = { ss: 0, lg: 0, go: 0, ot: 0 }));
 
-        data.forEach((d) => {
-          MODELS.forEach((m) => {
+        data.forEach(d => {
+          MODELS.forEach(m => {
             mtd.panel[m].ss += parseInt(d.panel[m]?.ss || 0);
             mtd.panel[m].so += parseInt(d.panel[m]?.so || 0);
             mtd.panel[m].pa += parseInt(d.panel[m]?.pa || 0);
             mtd.panel[m].ot += parseInt(d.panel[m]?.ot || 0);
           });
           mtd.audio.ss += parseInt(d.audio?.ss || 0);
-          mtd.audio.lg += parseInt(d.audio?.lg || 0);
-          mtd.audio.so += parseInt(d.audio?.so || 0);
-          mtd.audio.ot += parseInt(d.audio?.ot || 0);
-          HA_CATEGORIES.forEach((h) => {
+          HA_CATEGORIES.forEach(h => {
             mtd.ha[h].ss += parseInt(d.ha[h]?.ss || 0);
             mtd.ha[h].lg += parseInt(d.ha[h]?.lg || 0);
             mtd.ha[h].go += parseInt(d.ha[h]?.go || 0);
@@ -1130,270 +1001,282 @@
           mtd.haVal += parseInt(d.haValue || 0);
         });
 
-        const dateStr = getTodayDate().toLocaleDateString("en-GB", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        });
-        
-        let tSS = 0, tSO = 0, tPA = 0, tOT = 0;
-        Object.values(state.panel).forEach((v) => {
-          tSS += parseInt(v.ss || 0);
-          tSO += parseInt(v.so || 0);
-          tPA += parseInt(v.pa || 0);
-          tOT += parseInt(v.ot || 0);
-        });
+        const dateStr = getTodayDate().toLocaleDateString("en-GB", { year:"numeric", month:"2-digit", day:"2-digit" });
 
-        let mSS = 0, mSO = 0, mPA = 0, mOT = 0;
-        Object.values(mtd.panel).forEach((v) => {
-          mSS += v.ss;
-          mSO += v.so;
-          mPA += v.pa;
-          mOT += v.ot;
-        });
+        let tSS=0,tSO=0,tPA=0,tOT=0;
+        Object.values(state.panel).forEach(v => { tSS+=parseInt(v.ss||0); tSO+=parseInt(v.so||0); tPA+=parseInt(v.pa||0); tOT+=parseInt(v.ot||0); });
+        let mSS=0,mSO=0,mPA=0,mOT=0;
+        Object.values(mtd.panel).forEach(v => { mSS+=v.ss; mSO+=v.so; mPA+=v.pa; mOT+=v.ot; });
+        let hSS=0,hLG=0,hGO=0,hOT=0;
+        Object.values(state.ha).forEach(v => { hSS+=parseInt(v.ss||0); hLG+=parseInt(v.lg||0); hGO+=parseInt(v.go||0); hOT+=parseInt(v.ot||0); });
+        let mhSS=0,mhLG=0,mhGO=0,mhOT=0;
+        Object.values(mtd.ha).forEach(v => { mhSS+=v.ss; mhLG+=v.lg; mhGO+=v.go; mhOT+=v.ot; });
 
-        let hSS = 0, hLG = 0, hGO = 0, hOT = 0;
-        Object.values(state.ha).forEach((v) => {
-          hSS += parseInt(v.ss || 0);
-          hLG += parseInt(v.lg || 0);
-          hGO += parseInt(v.go || 0);
-          hOT += parseInt(v.ot || 0);
-        });
+        const SEP  = '------------------------------';
+        const SEP2 = '==========================';
 
-        let mhSS = 0, mhLG = 0, mhGO = 0, mhOT = 0;
-        Object.values(mtd.ha).forEach((v) => {
-          mhSS += v.ss;
-          mhLG += v.lg;
-          mhGO += v.go;
-          mhOT += v.ot;
-        });
+        // Exact column widths to match sample:
+        // Model/Category col = 16 chars, then each number col = 4 chars right-padded with spaces
+        // "32 Basic         0   0   0   0"
+        // label(16) + rp(val,4) x 4
+        const pRow = (m, ss, so, pa, ot) =>
+          `${rp(m, 16)}${lp(ss, 3)} ${lp(so, 3)} ${lp(pa, 3)} ${lp(ot, 3)}`;
+        const aRow = (m, ss, so, ot) =>
+          `${rp(m, 16)}${lp(ss, 3)} ${lp(so, 3)} ${lp(ot, 3)}`;
+        const hRow = (m, ss, lg, go, ot) =>
+          `${rp(m, 16)}${lp(ss, 3)} ${lp(lg, 3)} ${lp(go, 3)} ${lp(ot, 3)}`;
 
-        // IMPROVED REPORT FORMATTING FOR WHATSAPP
-        const LINE = '━━━━━━━━━━━━━━━━━━━━━━━';
-        
-        // Build AV part with better alignment
-        let avTxt = `AV SALES REPORT\n`;
-        avTxt += `Date : ${dateStr}\n`;
-        avTxt += `Store: M'lore Digital Matrix\n`;
-        avTxt += `SEC  : Durga Prasad D Shetty\n\n`;
-        avTxt += `${LINE}\n\n`;
+        const tBlock = (qtyTgt, qtyAch, qtyPct, valTgt, valAch, valPct) =>
+          `TARGET VS ACHIEVEMENT\n${SEP}\n` +
+          `QTY (SS)\n` +
+          `Target : ${qtyTgt}\n` +
+          `Achiev : ${qtyAch}\n` +
+          `%      : ${qtyPct}\n` +
+          `Value\n` +
+          `Target : Rs.${valTgt}\n` +
+          `Achiev : Rs.${valAch}\n` +
+          `%      : ${valPct}\n` +
+          `${SEP}`;
+
+        // ── AV REPORT ──
+        let avTxt = '';
+        avTxt += `${SEP2}\n`;
+        avTxt += `   AV SALES REPORT\n`;
+        avTxt += `${SEP2}\n`;
+        avTxt += `Date  : ${dateStr}\n`;
+        avTxt += `Store : M'lore Digital Matrix\n`;
+        avTxt += `SEC   : Durga Prasad D Shetty\n`;
+        avTxt += `${SEP2}\n`;
+
+        // PANEL FTD
         avTxt += `PANEL SALES FTD\n`;
-        avTxt += `${padRight('Model', 12)} ${padLeft('SS', 3)} ${padLeft('SO', 3)} ${padLeft('PA', 3)} ${padLeft('OT', 3)}\n`;
-        
-        MODELS.forEach((m) => {
+        avTxt += `${pRow('Model', 'SS', 'SO', 'PA', 'OT')}\n`;
+        avTxt += `${SEP}\n`;
+        MODELS.forEach(m => {
           const d = state.panel[m];
-          avTxt += `${padRight(m, 12)} ${padLeft(d.ss || 0, 3)} ${padLeft(d.so || 0, 3)} ${padLeft(d.pa || 0, 3)} ${padLeft(d.ot || 0, 3)}\n`;
+          avTxt += `${pRow(m, d.ss||0, d.so||0, d.pa||0, d.ot||0)}\n`;
         });
-        
-        avTxt += `${LINE}\n`;
-        avTxt += `${padRight('Total', 12)} ${padLeft(tSS, 3)} ${padLeft(tSO, 3)} ${padLeft(tPA, 3)} ${padLeft(tOT, 3)}\n`;
-        avTxt += `${LINE}\n\n`;
-        
-        avTxt += `PANEL SALES MTD\n`;
-        avTxt += `${padRight('Model', 12)} ${padLeft('SS', 3)} ${padLeft('SO', 3)} ${padLeft('PA', 3)} ${padLeft('OT', 3)}\n`;
-        
-        MODELS.forEach((m) => {
-          const d = mtd.panel[m];
-          avTxt += `${padRight(m, 12)} ${padLeft(d.ss, 3)} ${padLeft(d.so, 3)} ${padLeft(d.pa, 3)} ${padLeft(d.ot, 3)}\n`;
-        });
-        
-        avTxt += `${LINE}\n`;
-        avTxt += `${padRight('Total', 12)} ${padLeft(mSS, 3)} ${padLeft(mSO, 3)} ${padLeft(mPA, 3)} ${padLeft(mOT, 3)}\n`;
-        avTxt += `${LINE}\n\n`;
-        
-        avTxt += `Audio QTY Sales FTD\n`;
-        avTxt += `${padRight('Type', 12)} ${padLeft('SS', 3)} ${padLeft('LG', 3)} ${padLeft('SO', 3)} ${padLeft('OT', 3)}\n`;
-        avTxt += `${padRight('Audio', 12)} ${padLeft(state.audio.ss || 0, 3)} ${padLeft(state.audio.lg || 0, 3)} ${padLeft(state.audio.so || 0, 3)} ${padLeft(state.audio.ot || 0, 3)}\n\n`;
-        
-        avTxt += `Audio QTY Sales MTD\n`;
-        avTxt += `${padRight('Type', 12)} ${padLeft('SS', 3)} ${padLeft('LG', 3)} ${padLeft('SO', 3)} ${padLeft('OT', 3)}\n`;
-        avTxt += `${padRight('Audio', 12)} ${padLeft(mtd.audio.ss, 3)} ${padLeft(mtd.audio.lg, 3)} ${padLeft(mtd.audio.so, 3)} ${padLeft(mtd.audio.ot, 3)}\n`;
-        avTxt += `${LINE}\n\n`;
-        
-        avTxt += `VALUE FTD / MTD\n`;
-        avTxt += `AV: ${formatNum(state.avValue)} / ${formatNum(mtd.avVal)}\n\n`;
-        avTxt += `Today Sold Models\n${state.avModels || "None"}`;
+        avTxt += `${SEP}\n`;
+        avTxt += `${pRow('Total', tSS, tSO, tPA, tOT)}\n`;
+        avTxt += `${SEP}\n`;
 
-        // Build HA part with better alignment
-        let haTxt = `HA SALES REPORT\n`;
-        haTxt += `Date : ${dateStr}\n`;
-        haTxt += `Store: M'lore Digital Matrix\n`;
-        haTxt += `SEC  : Durga Prasad D Shetty\n\n`;
-        haTxt += `${LINE}\n\n`;
-        
+        // PANEL MTD
+        avTxt += `PANEL SALES MTD\n`;
+        avTxt += `${pRow('Model', 'SS', 'SO', 'PA', 'OT')}\n`;
+        avTxt += `${SEP}\n`;
+        MODELS.forEach(m => {
+          const d = mtd.panel[m];
+          avTxt += `${pRow(m, d.ss, d.so, d.pa, d.ot)}\n`;
+        });
+        avTxt += `${SEP}\n`;
+        avTxt += `${pRow('Total', mSS, mSO, mPA, mOT)}\n`;
+        avTxt += `${SEP}\n`;
+
+        // AUDIO FTD
+        avTxt += `AUDIO SALES FTD\n`;
+        avTxt += `${aRow('Type', 'SS', 'SO', 'OT')}\n`;
+        avTxt += `${aRow('Audio', state.audio.ss||0, state.audio.so||0, state.audio.ot||0)}\n`;
+        avTxt += `${SEP}\n`;
+
+        // AUDIO MTD
+        avTxt += `AUDIO SALES MTD\n`;
+        avTxt += `${aRow('Type', 'SS', 'SO', 'OT')}\n`;
+        avTxt += `${aRow('Audio', mtd.audio.ss, mtd.audio.so, mtd.audio.ot)}\n`;
+        avTxt += `${SEP}\n`;
+
+        // VALUE
+        avTxt += `VALUE\n`;
+        avTxt += `${SEP}\n`;
+        avTxt += `FTD  :  Rs.${formatNum(state.avValue)}\n`;
+        avTxt += `MTD  :  Rs.${formatNum(mtd.avVal)}\n`;
+        avTxt += `${SEP}\n`;
+
+        // TARGET VS ACHIEVEMENT
+        const avQtyTgt = state.avQtyTarget || 0;
+        const avQtyAch = mSS + (parseInt(mtd.audio.ss) || 0);
+        const avQtyPct = avQtyTgt > 0 ? ((avQtyAch/avQtyTgt)*100).toFixed(1)+'%' : 'N/A';
+        const avTgt = state.avTarget || 0;
+        const avAch = mtd.avVal || 0;
+        const avPct = avTgt > 0 ? ((avAch/avTgt)*100).toFixed(1)+'%' : 'N/A';
+        avTxt += tBlock(avQtyTgt, avQtyAch, avQtyPct, formatNum(avTgt), formatNum(avAch), avPct) + '\n';
+
+        // MODELS SOLD TODAY
+        avTxt += `MODELS SOLD TODAY\n`;
+        avTxt += `${SEP}\n`;
+        const avModelList = (state.avModels||'').split('\n').map(m=>m.trim()).filter(Boolean);
+        avModelList.length ? avModelList.forEach(m => { avTxt += `${m}\n`; }) : avTxt += `None\n`;
+        avTxt += SEP;
+
+        // ── HA REPORT ──
+        let haTxt = '';
+        haTxt += `${SEP2}\n`;
+        haTxt += `   HA SALES REPORT\n`;
+        haTxt += `${SEP2}\n`;
+        haTxt += `Date  : ${dateStr}\n`;
+        haTxt += `Store : M'lore Digital Matrix\n`;
+        haTxt += `SEC   : Durga Prasad D Shetty\n`;
+        haTxt += `${SEP2}\n`;
+
+        // HA FTD
         haTxt += `HA SALES FTD\n`;
-        haTxt += `${padRight('Category', 12)} ${padLeft('SS', 3)} ${padLeft('LG', 3)} ${padLeft('GO', 3)} ${padLeft('OT', 3)}\n`;
-        
-        HA_CATEGORIES.forEach((h) => {
+        haTxt += `${hRow('Category', 'SS', 'LG', 'GO', 'OT')}\n`;
+        haTxt += `${SEP}\n`;
+        HA_CATEGORIES.forEach(h => {
           const d = state.ha[h];
-          haTxt += `${padRight(h, 12)} ${padLeft(d.ss || 0, 3)} ${padLeft(d.lg || 0, 3)} ${padLeft(d.go || 0, 3)} ${padLeft(d.ot || 0, 3)}\n`;
+          haTxt += `${hRow(h, d.ss||0, d.lg||0, d.go||0, d.ot||0)}\n`;
         });
-        
-        haTxt += `${LINE}\n`;
-        haTxt += `${padRight('Total', 12)} ${padLeft(hSS, 3)} ${padLeft(hLG, 3)} ${padLeft(hGO, 3)} ${padLeft(hOT, 3)}\n`;
-        haTxt += `${LINE}\n\n`;
-        
+        haTxt += `${SEP}\n`;
+        haTxt += `${hRow('Total', hSS, hLG, hGO, hOT)}\n`;
+        haTxt += `${SEP}\n`;
+
+        // HA MTD
         haTxt += `HA SALES MTD\n`;
-        haTxt += `${padRight('Category', 12)} ${padLeft('SS', 3)} ${padLeft('LG', 3)} ${padLeft('GO', 3)} ${padLeft('OT', 3)}\n`;
-        
-        HA_CATEGORIES.forEach((h) => {
+        haTxt += `${hRow('Category', 'SS', 'LG', 'GO', 'OT')}\n`;
+        haTxt += `${SEP}\n`;
+        HA_CATEGORIES.forEach(h => {
           const d = mtd.ha[h];
-          haTxt += `${padRight(h, 12)} ${padLeft(d.ss, 3)} ${padLeft(d.lg, 3)} ${padLeft(d.go, 3)} ${padLeft(d.ot, 3)}\n`;
+          haTxt += `${hRow(h, d.ss, d.lg, d.go, d.ot)}\n`;
         });
-        
-        haTxt += `${LINE}\n`;
-        haTxt += `${padRight('Total', 12)} ${padLeft(mhSS, 3)} ${padLeft(mhLG, 3)} ${padLeft(mhGO, 3)} ${padLeft(mhOT, 3)}\n`;
-        haTxt += `${LINE}\n\n`;
-        
-        haTxt += `HA VALUE MTD\n`;
-        haTxt += `HA: ${formatNum(state.haValue)} / ${formatNum(mtd.haVal)}\n\n`;
-        haTxt += `Today Sold Categories\n${state.haModels || "None"}`;
+        haTxt += `${SEP}\n`;
+        haTxt += `${hRow('Total', mhSS, mhLG, mhGO, mhOT)}\n`;
+        haTxt += `${SEP}\n`;
+
+        // VALUE
+        haTxt += `VALUE\n`;
+        haTxt += `${SEP}\n`;
+        haTxt += `FTD  :  Rs.${formatNum(state.haValue)}\n`;
+        haTxt += `MTD  :  Rs.${formatNum(mtd.haVal)}\n`;
+        haTxt += `${SEP}\n`;
+
+        // TARGET VS ACHIEVEMENT
+        const haQtyTgt = state.haQtyTarget || 0;
+        const haQtyAch = mhSS;
+        const haQtyPct = haQtyTgt > 0 ? ((haQtyAch/haQtyTgt)*100).toFixed(1)+'%' : 'N/A';
+        const haTgt = state.haTarget || 0;
+        const haAch = mtd.haVal || 0;
+        const haPct = haTgt > 0 ? ((haAch/haTgt)*100).toFixed(1)+'%' : 'N/A';
+        haTxt += tBlock(haQtyTgt, haQtyAch, haQtyPct, formatNum(haTgt), formatNum(haAch), haPct) + '\n';
+
+        // CATEGORIES SOLD TODAY
+        haTxt += `CATEGORIES SOLD TODAY\n`;
+        haTxt += `${SEP}\n`;
+        const haModelList = (state.haModels||'').split('\n').map(m=>m.trim()).filter(Boolean);
+        haModelList.length ? haModelList.forEach(m => { haTxt += `${m}\n`; }) : haTxt += `None\n`;
+        haTxt += SEP;
 
         return { avTxt, haTxt };
       };
 
-      const wrapForWhatsApp = (text) => `\`\`\`\n${text}\n\`\`\``;
+      const wrapWhatsApp = (text) => `\`\`\`\n${text.trim()}\n\`\`\``;
 
-      const getReport = () => {
-        const { avTxt, haTxt } = getReportData();
-        const combined = `${avTxt}\n\n${haTxt}`;
-        document.getElementById("report-text").value = wrapForWhatsApp(combined);
-        modalTitle.textContent = "Daily Report";
+      const showReport = (text, title) => {
+        document.getElementById("report-text").value = text.trim();
+        modalTitle.textContent = title;
         document.getElementById("modal").classList.add("open");
       };
 
-      // Clear Data
+      // ── CLEAR DATA ──
       const clearAllData = () => {
-        if (confirm('Are you sure you want to clear ALL data? This action cannot be undone.')) {
-          localStorage.removeItem(getKey());
-          
-          document.querySelectorAll('input').forEach(input => {
-            if (input.type === 'number') input.value = '0';
-            else input.value = '';
-          });
-
-          selectedAvModels = [];
-          selectedHaModels = [];
-          updateSelectedAvModelsDisplay();
-          updateSelectedHaModelsDisplay();
-
-          state = {
-            panel: {},
-            panelValues: {},
-            audio: { ss: 0, lg: 0, so: 0, ot: 0 },
-            audioValue: 0,
-            ha: {},
-            haValues: {},
-            avValue: 0,
-            haValue: 0,
-            avModels: "",
-            haModels: "",
-          };
-
-          MODELS.forEach((m) => {
-            state.panel[m] = { ss: 0, so: 0, pa: 0, ot: 0 };
-            state.panelValues[m] = 0;
-          });
-          HA_CATEGORIES.forEach((h) => {
-            state.ha[h] = { ss: 0, lg: 0, go: 0, ot: 0 };
-            state.haValues[h] = 0;
-          });
-
-          updateTotals();
-        }
+        if (!confirm('Clear ALL today\'s data? This cannot be undone.')) return;
+        localStorage.removeItem(getKey());
+        document.querySelectorAll('input[type="number"]').forEach(inp => {
+          if (!['av-target','ha-target','av-qty-target','ha-qty-target'].includes(inp.id)) inp.value = '0';
+        });
+        document.querySelectorAll('input[type="text"]').forEach(inp => inp.value = '');
+        selectedAvModels = []; selectedHaModels = [];
+        updateSelectedAvModelsDisplay(); updateSelectedHaModelsDisplay();
+        state = {
+          panel: {}, panelValues: {},
+          audio: { ss: 0, so: 0, ot: 0 }, audioValue: 0,
+          ha: {}, haValues: {},
+          avValue: 0, haValue: 0,
+          avModels: "", haModels: "",
+          avTarget: state.avTarget, haTarget: state.haTarget,
+          avQtyTarget: state.avQtyTarget, haQtyTarget: state.haQtyTarget,
+        };
+        MODELS.forEach(m => { state.panel[m] = { ss:0,so:0,pa:0,ot:0 }; state.panelValues[m] = 0; });
+        HA_CATEGORIES.forEach(h => { state.ha[h] = { ss:0,lg:0,go:0,ot:0 }; state.haValues[h] = 0; });
+        updateTotals();
       };
 
-      // Handlers
+      // ── BUTTON HANDLERS ──
       document.getElementById("close-modal").onclick = () => document.getElementById("modal").classList.remove("open");
       document.getElementById("modal-close-btn").onclick = () => document.getElementById("modal").classList.remove("open");
-      
+
       document.getElementById("save-btn").onclick = () => {
-          save();
-          const btn = document.getElementById("save-btn");
-          const originalText = btn.innerHTML;
-          btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Saved!`;
-          setTimeout(() => btn.innerHTML = originalText, 2000);
+        save();
+        const btn = document.getElementById("save-btn");
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Saved!`;
+        setTimeout(() => btn.innerHTML = orig, 2000);
       };
-      
+
       document.getElementById("clear-btn").onclick = clearAllData;
-      document.getElementById("report-btn").onclick = getReport;
+
+      document.getElementById("reset-targets-btn").onclick = () => {
+        if (!confirm('Reset monthly targets? This will clear AV & HA QTY and Value targets.')) return;
+        localStorage.removeItem(getTargetKey());
+        state.avTarget = 0; state.haTarget = 0; state.avQtyTarget = 0; state.haQtyTarget = 0;
+        avTargetInput.value = ""; haTargetInput.value = "";
+        avQtyTargetInput.value = ""; haQtyTargetInput.value = "";
+      };
+
+      document.getElementById("report-btn").onclick = () => {
+        const { avTxt, haTxt } = getReportData();
+        showReport(wrapWhatsApp(`${avTxt}\n\n${haTxt}`), "Daily Report");
+      };
       document.getElementById("report-av-btn").onclick = () => {
         const { avTxt } = getReportData();
-        document.getElementById("report-text").value = wrapForWhatsApp(avTxt);
-        modalTitle.textContent = "AV Report";
-        document.getElementById("modal").classList.add("open");
+        showReport(wrapWhatsApp(avTxt), "AV Report");
       };
       document.getElementById("report-ha-btn").onclick = () => {
         const { haTxt } = getReportData();
-        document.getElementById("report-text").value = wrapForWhatsApp(haTxt);
-        modalTitle.textContent = "HA Report";
-        document.getElementById("modal").classList.add("open");
+        showReport(wrapWhatsApp(haTxt), "HA Report");
       };
-      
+
       document.getElementById("copy-btn").onclick = () => {
         const text = document.getElementById("report-text").value;
-        const copyBtn = document.getElementById("copy-btn");
         const reportTextarea = document.getElementById("report-text");
-
-        reportTextarea.focus();
-        reportTextarea.select();
-        
+        const copyBtn = document.getElementById("copy-btn");
+        reportTextarea.focus(); reportTextarea.select();
         try {
           if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(() => {
-               showSuccess(copyBtn);
-            }).catch(() => {
-               document.execCommand('copy');
-               showSuccess(copyBtn);
-            });
-          } else {
-            document.execCommand('copy');
-            showSuccess(copyBtn);
-          }
-        } catch (err) {
-          alert('Press Ctrl+C to copy!');
-        }
+            navigator.clipboard.writeText(text).then(() => showCopySuccess(copyBtn)).catch(() => { document.execCommand('copy'); showCopySuccess(copyBtn); });
+          } else { document.execCommand('copy'); showCopySuccess(copyBtn); }
+        } catch { alert('Press Ctrl+C to copy!'); }
       };
 
-      function showSuccess(btn) {
-        const original = btn.innerHTML;
-        btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Copied!`;
-        setTimeout(() => btn.innerHTML = original, 2000);
+      function showCopySuccess(btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Copied!`;
+        setTimeout(() => btn.innerHTML = orig, 2000);
       }
 
-      // Populate Datalists
+      // ── POPULATE DATALISTS ──
       const populateDatalist = (id, items) => {
         const list = document.getElementById(id);
-        items.forEach(item => {
-          const option = document.createElement('option');
-          option.value = item;
-          list.appendChild(option);
-        });
+        items.forEach(item => { const o = document.createElement('option'); o.value = item; list.appendChild(o); });
       };
-
       populateDatalist('av-models-list', TV_MODELS_SOLD);
       populateDatalist('ha-models-list', HA_MODELS_SOLD);
 
-      // Section Toggle
+      // ── SECTION TOGGLE ──
       document.querySelectorAll('.section-header').forEach(header => {
-        header.addEventListener('click', function() {
-          const section = this.closest('section');
-          const content = section.querySelector('.section-content');
+        header.addEventListener('click', function () {
+          const content = this.closest('section').querySelector('.section-content');
           this.classList.toggle('collapsed');
           content.classList.toggle('collapsed');
         });
       });
-      
-      // Initialize
-      document.getElementById("current-date").textContent = getTodayDate().toLocaleDateString("en-GB", {
-          day: "numeric",
-          month: "short",
-      });
-      load();
-      
-      // Make remove functions global
+
+      // ── MAKE REMOVALS GLOBAL ──
       window.removeAvModel = removeAvModel;
       window.removeHaModel = removeHaModel;
+
+      // ── INIT ──
+      document.getElementById("current-date").textContent = getTodayDate().toLocaleDateString("en-GB", { day:"numeric", month:"short" });
+      load();
+      loadTargets();
     </script>
   </body>
 </html>
