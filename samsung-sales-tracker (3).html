@@ -1101,7 +1101,7 @@
         avTxt += tBlock(avQtyTgt, avQtyAch, avQtyPct, formatNum(avTgt), formatNum(avAch), avPct) + '\n';
 
         // MODELS SOLD TODAY
-        avTxt += `MODELS SOLD TODAY\n`;
+        avTxt += `Model Sold Today\n`;
         avTxt += `${SEP}\n`;
         const avModelList = (state.avModels||'').split('\n').map(m=>m.trim()).filter(Boolean);
         avModelList.length ? avModelList.forEach(m => { avTxt += `${m}\n`; }) : avTxt += `None\n`;
