@@ -1158,7 +1158,7 @@
         haTxt += tBlock(haQtyTgt, haQtyAch, haQtyPct, formatNum(haTgt), formatNum(haAch), haPct) + '\n';
 
         // CATEGORIES SOLD TODAY
-        haTxt += `CATEGORIES SOLD TODAY\n`;
+        haTxt += `Model Sold Today\n`;
         haTxt += `${SEP}\n`;
         const haModelList = (state.haModels||'').split('\n').map(m=>m.trim()).filter(Boolean);
         haModelList.length ? haModelList.forEach(m => { haTxt += `${m}\n`; }) : haTxt += `None\n`;
