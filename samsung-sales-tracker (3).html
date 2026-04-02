@@ -1157,7 +1157,7 @@
         const haPct = haTgt > 0 ? ((haAch/haTgt)*100).toFixed(1)+'%' : 'N/A';
         haTxt += tBlock(haQtyTgt, haQtyAch, haQtyPct, formatNum(haTgt), formatNum(haAch), haPct) + '\n';
 
-        // CATEGORIES SOLD TODAY
+        // Model Sold Today
         haTxt += `Model Sold Today\n`;
         haTxt += `${SEP}\n`;
         const haModelList = (state.haModels||'').split('\n').map(m=>m.trim()).filter(Boolean);
